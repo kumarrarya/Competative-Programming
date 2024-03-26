@@ -1,0 +1,19 @@
+// pair<long long,long long> compute_hash(string const& s) {
+//     long long p = 31;
+//     long long m = 1e9 + 9;
+//     long long hash_value = 0;
+//     long long p_pow = 1;
+//     for (char c : s) {
+//         hash_value = (hash_value + (c - 'a' + 1) * p_pow) % m;
+//         p_pow = (p_pow * p) % m;
+//     }
+//     p = 27;
+//     m = 998244353;
+//     long long hash_value1 = 0;
+//     p_pow = 1;
+//     for (char c : s) {
+//         hash_value1 = (hash_value1 + (c - 'a' + 1) * p_pow) % m;
+//         p_pow = (p_pow * p) % m;
+//     }
+//     return {hash_value,hash_value1};
+// }
