@@ -1,0 +1,31 @@
+class DisjointSet {
+public: 
+vector<int>size; 
+vector<int> parent; 
+DisjointSet(int n){ 
+  size.resize(n, 1); 
+  parent.resize(n); 
+  for (int i = 0; i < n; i++) 
+  parent[i] = i; 
+}
+void join(int a, int b){ 
+  int u_a = find(a); 
+  int u_b = find(b); 
+  if (u_a == u_b)
+    return;
+  if (size[u_a] < size[u_b]){
+    parent[u_a] = u_b; 
+    size[u_b] += size[u_a];
+  } 
+  else{
+    parent[u_b] = u_a; 
+    size[u_a] += size[u_b];
+    } 
+  }
+  int find(int a){ 
+    return a == parent[a] ? a : parent[a] = find(parent[a]); 
+  }
+  bool check(int a, int b){ 
+    return find(a) == find(b);
+  }
+};
