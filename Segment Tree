@@ -1,0 +1,80 @@
+class SGTree{
+  
+public:
+  vector<int>tree;
+  vector<int>lazy;
+  int N;
+  SGTree(int n)
+  {
+    N=n;
+    tree.resize(4 * n + 1, 0);
+    lazy.resize(4 * n + 1, 0);
+  }
+  void Build(int node,int l,int r,vector<int>&a) {
+    if (l == r) tree[node] = a[l];
+    else {
+      int mid = l+(r-l)/2;
+      Build(node*2, l, mid,a);
+      Build(node*2+1, mid+1,r,a);
+      tree[node] = max(tree[node * 2],tree[node * 2 + 1]);
+    }
+  }
+  void Add(int node,int node_low,int node_high,int query_low,int query_high,int val){
+    
+    if(lazy[node]!=0){
+      tree[node]+=(node_high-node_low+1)*lazy[node];
+      if(node_low!=node_high){
+        lazy[2*node] +=lazy[node];
+        lazy[2*node+1] +=lazy[node];
+      }
+      lazy[node]=0;
+    }
+    if(node_high<query_low||query_high<node_low||node_low>node_high){
+      return;
+    }
+    if(query_low<=node_low&&node_high<=query_high){
+      tree[node]+=(node_high-node_low+1)*val;
+      if(node_low!=node_high){
+        lazy[2*node] +=val;
+        lazy[2*node+1] +=val;
+      }
+      return;
+    }
+    int mid=node_low+(node_high-node_low)/2;
+    Add(2*node,node_low,mid,query_low,query_high,val);
+    Add(2*node+1,mid+1,node_high,query_low,query_high,val);
+    tree[node]=max(tree[2*node],tree[2*node+1]);
+  }
+  int Pop(int node,int node_low,int node_high,int query_low,int query_high){
+    
+    if(lazy[node]!=0){
+      tree[node]+=(node_high-node_low+1)*lazy[node];
+      if(node_low!=node_high){
+        lazy[2*node] +=lazy[node];
+        lazy[2*node+1] +=lazy[node];
+      }
+      lazy[node]=0;
+    }
+    
+    if(query_low<=node_low && node_high<=query_high){
+      return tree[node];
+    }
+    if(node_high<query_low || query_high<node_low){
+      return 0;
+    }
+    int mid=node_low+(node_high-node_low)/2;
+    int left=Pop(2*node,node_low,mid,query_low,query_high);
+    int right=Pop(2*node+1,mid+1,node_high,query_low,query_high);
+    return max(left,right);
+  }
+  
+  void build(vector<int>&a){
+    Build(1,0,N-1,a);
+  }
+  void add(int l,int r,int val){
+    Add(1,0,N-1,l,r,val);
+  }
+  int pop(int l,int r){
+    return Pop(1,0,N-1,l,r);
+  }
+};
