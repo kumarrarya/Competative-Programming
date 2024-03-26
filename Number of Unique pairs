@@ -1,0 +1,14 @@
+// int prev=-1;
+//   int ans=0;
+//   // end ,start if multiset fix end and making pair from start
+//   while(end.size()!=0){
+//     int v=(*end.begin()).first;
+//     int curr=(*end.begin()).second;
+//     auto it=start.find({p[curr].first,curr});
+//     int u=(*it).first;
+//     end.erase(end.begin());
+//     if(u>prev){
+//       ans=ans+(u-prev)*(n-v);
+//     }
+//     prev=max(prev,u);
+// }
