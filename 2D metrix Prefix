@@ -1,0 +1,29 @@
+// 2D matrix Prefix
+void TwoDmatrixPrefix(int n,int m){
+  vector<vector<int>>a(n+1,vector<int>(m+1)),b(n+1,vector<int>(m+1));
+  for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+      cin>>a[i][j];
+    }
+  }
+  
+  // b is a 2d matrix Prefix;
+  for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+      b[i][j]=b[i-1][j]+b[i][j-1]-b[i-1][j-1]+a[i-1][j-1];
+    }
+  }
+  
+  // Rectangle queries:
+  // int q;
+  // cin>>q;
+  // sum=0;
+  // for(int i=0;i<q;i++){
+  //  int r1,c1,r2,c2;
+  //  cin>>r1>>c1>>r2>>c2;
+  //  r1++,r2++,c2++,c1++;
+  //  if(r1>r2) swap(r1,r2);
+  //  if(c1>c2) swap(c1,c2);
+  //  sum+=b[r2][c2]-b[r1-1][c2]-b[r2][c1-1]+b[r1-1][c1-1];
+  // }
+}
