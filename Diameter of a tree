@@ -1,0 +1,8 @@
+void diameter_of_tree(vector<int>adj[],int node,vector<int>&depth,vector<int>&path,int parent=-1){
+  for(auto &it:adj[node]){
+    if(it==parent) continue;
+    depth[it]=depth[node]+1;
+    path[it]=node;
+    diameter_of_tree(adj,it,depth,path,node);
+  }
+}
