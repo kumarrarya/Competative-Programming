@@ -1,0 +1,19 @@
+// class Node{
+//     vector<Node*>next;
+//     public:
+//     bool end;
+//     Node(){
+//         next.resize(26,NULL);
+//         end=false;
+//     }
+//     bool isContainKey(char c){
+//         if(next[c-'a']!=NULL) return true;
+//         return false;
+//     }
+//     void put(Node* node,char c){
+//         next[c-'a']=node;
+//     }
+//     Node* get(char c){
+//         return next[c-'a'];
+//     }
+// };
