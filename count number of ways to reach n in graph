@@ -1,0 +1,20 @@
+vector<long long>leftways(n+1,0);
+        leftways[0]=1;
+        while(st.size()!=0){
+            int node=(*st.begin()).second;
+            long long cost=(*st.begin()).first;
+            st.erase(st.begin());
+            for(auto it:adj[node]){
+                int u=it.first;
+                long long t=it.second;
+                if(dis[u]>cost+t){
+                    dis[u]=cost+t;
+                    leftways[u]=leftways[node];
+                    st.insert({dis[u],u});
+                }
+                else if(dis[u]==cost+t){
+                    leftways[u]+=leftways[node]%mod;
+                    leftways[u]%=mod;
+                }
+            }
+        }
